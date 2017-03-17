@@ -29,7 +29,7 @@ class MonitorStats:
         self.data = deque(maxlen=20)
         self.device_info = info.InformationStatistics()
         self.app = QtGui.QApplication([])
-        self.win = pg.GraphicsWindow(title="Monitor System Staistics")
+        self.win = pg.GraphicsWindow(title="Monitor System Statistics")
         self.win.resize(800,600)
         self.plot = self.win.addPlot(title='CPU and Swap Mem Usage', axisItems={'bottom': TimeAxisItem(orientation='bottom')})
         self.plot.addLegend()
