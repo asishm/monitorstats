@@ -1,3 +1,2 @@
 psutil
 pyqtgraph
-mysql-server
