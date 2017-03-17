@@ -33,6 +33,8 @@ class MonitorStats:
         self.win.resize(800,600)
         self.plot = self.win.addPlot(title='CPU and Swap Mem Usage', axisItems={'bottom': TimeAxisItem(orientation='bottom')})
         self.plot.addLegend()
+        self.plot.setMouseEnabled(False,False)
+        self.plot.setRange(yRange=(0,100), disableAutoRange=True) # Trying to fix y-axis at 0,100
         self.plot.setLimits(yMin=0, yMax=100, xMin=0) # Adds some limits to the size of the graph canvas
         self.plot.showGrid(x=True,y=True)
         self.plot.setLabel('left', "Percentage Utilization")
