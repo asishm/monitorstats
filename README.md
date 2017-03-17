@@ -27,4 +27,6 @@ Open your terminal and then run the following command
 python plot.py
 ```
 
-You will see the following  
+You will see the a graphical window similar to the below window
+
+![Imgur](http://i.imgur.com/8ziIVHS.png)
