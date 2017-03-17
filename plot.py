@@ -33,6 +33,7 @@ class MonitorStats:
         self.win.resize(800,600)
         self.plot = self.win.addPlot(title='CPU and Swap Mem Usage', axisItems={'bottom': TimeAxisItem(orientation='bottom')})
         self.plot.addLegend()
+        self.plot.setLimits(yMin=0, yMax=100, xMin=0)
         self.plot.showGrid(x=True,y=True)
         self.plot.setLabel('left', "Percentage Utilization")
         self.cpu_stats = self.plot.plot(pen='r',name="CPU Usage")
