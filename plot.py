@@ -62,5 +62,5 @@ class MonitorStats:
         self.app.exec_()
 
 if __name__ == "__main__":
-    start = MonitorStats(sampleinterval=2000)
+    start = MonitorStats(sampleinterval=20000)
     start.run()
