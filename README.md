@@ -13,6 +13,18 @@ Planning to add the following soon
 - Interface statistics (sent/receive packets)
 
 ## Systems Supported
-- Linux
-- OS X
-- Windows
+- Ubuntu-Linux(16.04) (Done)
+- OS X  (In Progress)
+- Windows (In Progress)
+
+
+## To Use
+Please clone the repository. As of now this code works perfectly well for Ubuntu-Linux(16.04).
+
+Open your terminal and then run the following command
+
+```
+python plot.py
+```
+
+You will see the following  
