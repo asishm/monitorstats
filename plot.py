@@ -56,9 +56,7 @@ class MonitorStats:
         """
             Fetch data from system
         """
-        t = self.time.elapsed()
-        print(t)
-        self.data.append({'x': t, 'y1': self.device_info.get_cpu_usage(), 'y2': self.device_info.get_swap_mem_usage()})
+        self.data.append({'x': self.time.elapsed(), 'y1': self.device_info.get_cpu_usage(), 'y2': self.device_info.get_swap_mem_usage()})
         x = [item['x'] for item in self.data]
         y1 = [item['y1'] for item in self.data]
         y2 = [item['y2'] for item in self.data]
