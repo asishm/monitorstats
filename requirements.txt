@@ -1,2 +1,5 @@
 psutil
 pyqtgraph
+pyqt5
+pyqt4
+pyside
