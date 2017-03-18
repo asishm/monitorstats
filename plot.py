@@ -36,6 +36,7 @@ class MonitorStats:
         self.plot.setLimits(yMin=0, yMax=100, xMin=0)
         self.plot.showGrid(x=True,y=True)
         self.plot.setLabel('left', "Percentage Utilization")
+        self.plot.setLabel('bottom', "Time (s)")
         self.cpu_stats = self.plot.plot(pen='r',name="CPU Usage")
         self.swap_mem_stats = self.plot.plot(pen='b', name="Swap Mem Usage")
         self.time = QtCore.QTime()
