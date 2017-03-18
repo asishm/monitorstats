@@ -17,7 +17,7 @@ class TimeAxisItem(pg.AxisItem):
         strns = []
         for x in values:
             try:
-                strns.append(time.strftime("%H:%M:%S", time.gmtime(x)))    # time_t --> time.struct_time
+                strns.append(time.strftime("%M:%S", time.gmtime(x)))    # time_t --> time.struct_time
             except ValueError:  # Windows can't handle dates before 1970
                 strns.append('')
         return strns
