@@ -1,3 +1,9 @@
 psutil
 pyqtgraph
+<<<<<<< HEAD
 #mysql-server
+=======
+pyqt5
+pyqt4
+pyside
+>>>>>>> master
