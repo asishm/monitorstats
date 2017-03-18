@@ -9,6 +9,8 @@ import time
 In order to display time on x axis overriding tickStrings() from
 AxisItem module.
 """
+
+
 class TimeAxisItem(pg.AxisItem):
     def __init__(self, *args, **kwargs):
         super(TimeAxisItem, self).__init__(*args, **kwargs)
@@ -17,7 +19,7 @@ class TimeAxisItem(pg.AxisItem):
         strns = []
         for x in values:
             try:
-                strns.append(time.strftime("%M:%S", time.gmtime(x)))    # time_t --> time.struct_time
+                strns.append(time.strftime("%M:%S", time.gmtime(x/1000)))    # time_t --> time.struct_time
             except ValueError:  # Windows can't handle dates before 1970
                 strns.append('')
         return strns
@@ -25,7 +27,7 @@ class TimeAxisItem(pg.AxisItem):
 
 class MonitorStats:
 
-    def __init__(self,sampleinterval=2000):
+    def __init__(self, sampleinterval=2000):
         """
             Monitor System Statistics
 
@@ -37,14 +39,16 @@ class MonitorStats:
         self.device_info = info.InformationStatistics()
         self.app = QtGui.QApplication([])
         self.win = pg.GraphicsWindow(title="Monitor System Statistics")
-        self.win.resize(800,600)
-        self.plot = self.win.addPlot(title='CPU and Swap Mem Usage', axisItems={'bottom': TimeAxisItem(orientation='bottom')})
+        self.win.resize(800, 600)
+        self.plot = self.win.addPlot(
+            title='CPU and Swap Mem Usage',
+            axisItems={'bottom': TimeAxisItem(orientation='bottom')})
         self.plot.addLegend()
         self.plot.setLimits(yMin=0, yMax=100, xMin=0)
-        self.plot.showGrid(x=True,y=True)
+        self.plot.showGrid(x=True, y=True)
         self.plot.setLabel('left', "Percentage Utilization")
         self.plot.setLabel('bottom', "Time (s)")
-        self.cpu_stats = self.plot.plot(pen='r',name="CPU Usage")
+        self.cpu_stats = self.plot.plot(pen='r', name="CPU Usage")
         self.swap_mem_stats = self.plot.plot(pen='b', name="Swap Mem Usage")
         self.time = QtCore.QTime()
         self.time.start()
@@ -56,16 +60,21 @@ class MonitorStats:
         """
             Fetch data from system
         """
-        self.data.append({'x': self.time.elapsed(), 'y1': self.device_info.get_cpu_usage(), 'y2': self.device_info.get_swap_mem_usage()})
+        self.data.append({
+            'x': self.time.elapsed(),
+            'y1': self.device_info.get_cpu_usage(),
+            'y2': self.device_info.get_swap_mem_usage()
+            })
         x = [item['x'] for item in self.data]
         y1 = [item['y1'] for item in self.data]
         y2 = [item['y2'] for item in self.data]
-        self.cpu_stats.setData(x=x,y=y1)
-        self.swap_mem_stats.setData(x=x,y=y2)
+        self.cpu_stats.setData(x=x, y=y1)
+        self.swap_mem_stats.setData(x=x, y=y2)
         self.app.processEvents()
 
     def run(self):
         self.app.exec_()
+
 
 if __name__ == "__main__":
     start = MonitorStats(sampleinterval=2000)
