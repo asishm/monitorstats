@@ -2,6 +2,7 @@ from pyqtgraph import QtGui, QtCore
 import pyqtgraph as pg
 from collections import deque
 import deviceinfo as info
+import time
 
 
 """
@@ -9,11 +10,17 @@ In order to display time on x axis overriding tickStrings() from
 AxisItem module.
 """
 class TimeAxisItem(pg.AxisItem):
-        def __init__(self, *args, **kwargs):
-            super(TimeAxisItem, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(TimeAxisItem, self).__init__(*args, **kwargs)
 
-        def tickStrings(self, values, scale, spacing):
-            return [QtCore.QTime().addMSecs(value).toString('mm:ss') for value in values]
+    def tickStrings(self, values, scale, spacing):
+        strns = []
+        for x in values:
+            try:
+                strns.append(time.strftime("%M:%S", time.gmtime(x)))    # time_t --> time.struct_time
+            except ValueError:  # Windows can't handle dates before 1970
+                strns.append('')
+        return strns
 
 
 class MonitorStats:
